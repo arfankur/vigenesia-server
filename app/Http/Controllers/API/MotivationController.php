@@ -9,6 +9,7 @@ use App\Models\Product;
 use Validator;
 use App\Http\Resources\ProductResource;
 use App\Models\Motivation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
 
@@ -73,7 +74,7 @@ class MotivationController extends BaseController
 
         $validator = FacadesValidator::make($input, [
             // 'name' => 'required',
-            'motivation' => 'required'
+            'motivation' => 'required',
         ]);
 
         if($validator->fails()){
@@ -84,7 +85,10 @@ class MotivationController extends BaseController
         // $motivation = Motivation::create([
         //     'motivation'    =>  $request->motivation,
         // ]);
-        $motivation = Motivation::create($input);
+        $motivation = Motivation::create([
+            'user_id' => Auth::id(),
+            'motivation' => $request->motivation
+        ]);
 
         // return $this->sendResponse(new MotivationResource($mot   ivation), 'Motivation created successfully.');
     }
@@ -151,7 +155,6 @@ class MotivationController extends BaseController
 
         // $motivation->name = $input['name'];
         $motivation->motivation = $input['motivation'];
-        // $motivation->motivation = $input['motivation'];
         $motivation->save();
 
         return response()->json($motivation);

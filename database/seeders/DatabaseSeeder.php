@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Motivation;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -29,11 +30,30 @@ class DatabaseSeeder extends Seeder
                 "role" => "employee"
             ],
         );
-        // User::create([
-        //     'name'      =>  'coba',
-        //     'job'       =>  'coba',
-        //     'email'     =>  'coba@coba.coba',
-        //     'password'  =>  bcrypt('coba')
-        // ]);
+        User::create([
+            'name'      =>  'test',
+            'job'       =>  'test',
+            'email'     =>  'test@test.test',
+            'role_id'   =>  '2',
+            'password'  =>  bcrypt('test')
+        ]);
+        User::create([
+            'name'      =>  'example',
+            'job'       =>  'example',
+            'email'     =>  'example@example.example',
+            'role_id'   =>  '2',
+            'password'  =>  bcrypt('example')
+        ]);
+        Motivation::create([
+            'motivation'      =>  'test motivation',
+            'user_id'       =>  '1',
+
+        ]);
+        Motivation::create([
+            'motivation'      =>  'example motivation',
+            'user_id'       =>  '2',
+
+        ]);
+
     }
 }

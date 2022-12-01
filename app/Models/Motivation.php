@@ -39,14 +39,7 @@ class Motivation extends Model
     // public $incrementing = false;
 
 
-    protected static function boot()
-    {
-        parent::boot();
 
-        static::creating(function($q){
-            $q->user_id = Auth::user()->id;
-        });
-    }
 
     public function user()
     {
